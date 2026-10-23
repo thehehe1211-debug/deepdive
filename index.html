@@ -9,421 +9,167 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-  /* ---------- Colours and fonts ---------- */
-  :root {
-    --foam: #ffffff;
-    --mist: #b8efff;
-    --shallows: #0a5f8f;
-    --twilight-blue: #0b3a6b;
-    --midnight-blue: #071f4a;
-    --abyss-blue: #040f2c;
-    --trench-black: #01040f;
-    --card-tint: rgba(1, 16, 39, 0.26);
-    --card-tint-mobile: rgba(1, 10, 26, 0.70);
-    --pixel-font: "Press Start 2P", "Courier New", monospace;
-    --body-font: "Courier New", monospace;
-  }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: #fff; font-family: "Courier New", monospace; background: #01040f; overflow-x: hidden; }
+a { color: inherit; }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+.splash { min-height: 100svh; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 110px 24px 70px; background: linear-gradient(180deg, #1a8fc4, #0a5f8f); }
+.splash::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .22; background-image: radial-gradient(#fff 2px, transparent 2px); background-size: 38px 38px; mask-image: linear-gradient(to bottom, #000, transparent 90%); }
 
-  body {
-    margin: 0;
-    color: var(--foam);
-    font-family: var(--body-font);
-    background: var(--trench-black);
-    overflow-x: hidden;
-  }
+.bar { position: absolute; top: 22px; left: 25px; right: 25px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 10px; line-height: 1.6; letter-spacing: .08em; text-transform: uppercase; }
+.bar a { text-decoration: none; border: 2px solid rgba(255,255,255,.72); padding: 10px 12px; }
+.logo { font-family: "Press Start 2P", "Courier New", monospace; font-size: 10px; line-height: 1.7; }
+.tag { font-family: "Press Start 2P", "Courier New", monospace; font-size: 10px; line-height: 1.9; letter-spacing: .08em; color: #b8efff; }
 
-  a { color: inherit; }
+h1 { max-width: 1000px; margin: 26px auto 18px; font-family: "Press Start 2P", "Courier New", monospace; font-size: clamp(30px, 7.8vw, 88px); line-height: 1.55; letter-spacing: -.05em; overflow-wrap: anywhere; }
+h1 span { display: block; color: #b8efff; }
+.splash p { max-width: 565px; font-size: 15px; line-height: 1.9; margin: 8px auto 0; color: #e6f8ff; }
 
-  /* ---------- Hero ---------- */
-  .surface-hero {
-    min-height: 100svh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 110px 24px 70px;
-    background: linear-gradient(180deg, #1a8fc4 0%, var(--shallows) 100%);
-  }
+.scrollnote { margin-top: 38px; font-family: "Press Start 2P", "Courier New", monospace; font-size: 9px; line-height: 2; letter-spacing: .06em; color: #b8efff; }
+.scrollnote i { display: block; font-style: normal; font-family: "Courier New", monospace; font-size: 26px; line-height: 1.2; }
 
-  .surface-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.22;
-    background-image: radial-gradient(#ffffff 2px, transparent 2px);
-    background-size: 38px 38px;
-    mask-image: linear-gradient(to bottom, #000000, transparent 90%);
-  }
+.dolly { width: clamp(100px, 19vw, 190px); height: clamp(100px, 19vw, 190px); object-fit: contain; image-rendering: pixelated; image-rendering: crisp-edges; position: absolute; right: clamp(14px, 9vw, 130px); bottom: 8%; animation: hover 4s steps(2, end) infinite; }
 
-  .top-strip {
-    position: absolute;
-    top: 22px;
-    left: 25px;
-    right: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    font-size: 10px;
-    line-height: 1.6;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+.band { position: relative; min-height: 780px; display: flex; align-items: center; padding: 90px max(24px, calc((100% - 1080px) / 2)); isolation: isolate; }
+.band::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .18; background-image: radial-gradient(#b8efff 2px, transparent 2px); background-size: 46px 46px; }
+.sun { background: linear-gradient(180deg, #0a5f8f, #0b4f80); }
+.dusk { background: linear-gradient(180deg, #0b4f80, #0b3a6b); }
+.dark { background: linear-gradient(180deg, #0b3a6b, #071f4a); }
+.abyss { background: linear-gradient(180deg, #071f4a, #040f2c); }
+.trench { background: linear-gradient(180deg, #040f2c, #01040f); }
 
-  .logo-mark {
-    font-family: var(--pixel-font);
-    font-size: 10px;
-    line-height: 1.7;
-  }
+.box { position: relative; z-index: 2; width: min(420px, 100%); padding: 22px; background: rgba(1, 16, 39, .26); }
+.push { margin-left: auto; }
+.badge { display: inline-block; border: 2px solid #b8efff; color: #b8efff; padding: 11px 12px; margin-bottom: 24px; font-family: "Press Start 2P", "Courier New", monospace; font-size: 8px; line-height: 1.8; }
+.metres { font-family: "Press Start 2P", "Courier New", monospace; font-size: 9px; color: #b8efff; }
+h2 { font-family: "Press Start 2P", "Courier New", monospace; font-size: clamp(20px, 3.5vw, 34px); letter-spacing: -.04em; line-height: 1.7; margin: 12px 0 18px; }
+.box p { color: #dff6ff; }
+.floor { font-family: "Press Start 2P", "Courier New", monospace; font-size: 8px; color: #b8efff; }
+.note { margin-top: 22px; padding: 16px; border-left: 4px solid #b8efff; background: rgba(184, 239, 255, .08); }
 
-  .top-strip a {
-    text-decoration: none;
-    border: 2px solid rgba(255, 255, 255, 0.72);
-    padding: 10px 12px;
-  }
+.fish { position: absolute; z-index: 1; width: clamp(190px, 29vw, 330px); height: clamp(190px, 29vw, 330px); object-fit: contain; image-rendering: pixelated; image-rendering: crisp-edges; animation: hover 5s steps(2, end) infinite; filter: none; }
+.fl { left: 5%; top: 18%; }
+.fr { right: 5%; top: 16%; }
+.fs { width: clamp(140px, 20vw, 230px); height: clamp(140px, 20vw, 230px); }
+.dashline { position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px dashed rgba(184,239,255,.2); pointer-events: none; }
 
-  .kicker {
-    font-family: var(--pixel-font);
-    font-size: 10px;
-    line-height: 1.9;
-    letter-spacing: 0.08em;
-    color: var(--mist);
-  }
+@keyframes hover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-  h1 {
-    max-width: 1000px;
-    margin: 26px auto 18px;
-    font-family: var(--pixel-font);
-    font-size: clamp(30px, 7.8vw, 88px);
-    line-height: 1.55;
-    letter-spacing: -0.05em;
-    overflow-wrap: anywhere;
-    color: var(--foam);
-  }
+.end { position: relative; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 24px; text-align: center; background: linear-gradient(180deg, #01040f, #000); }
+.end h2 { max-width: 750px; margin: 24px auto; }
+.end p { max-width: 520px; color: #dff6ff; }
+.enddolphin { width: min(240px, 58vw); height: auto; image-rendering: pixelated; image-rendering: crisp-edges; }
+.upbtn { display: inline-block; margin-top: 25px; padding: 14px 16px; border: 2px solid #b8efff; color: #b8efff; font-family: "Press Start 2P", "Courier New", monospace; font-size: 9px; text-decoration: none; }
+.credit { padding: 30px 20px; text-align: center; background: #000; color: #8fb8c9; font-size: 12px; line-height: 1.8; }
+.credit a { color: #b8efff; }
 
-  h1 span {
-    display: block;
-    color: var(--mist);
-  }
+@media (max-width: 680px) {
+  .bar { left: 14px; right: 14px; top: 14px; font-size: 8px; }
+  .logo { font-size: 8px; max-width: 150px; }
+  .bar a { padding: 8px; }
+  .splash { padding-top: 125px; }
+  h1 { font-size: clamp(25px, 8vw, 45px); line-height: 1.7; }
+  .splash p { font-size: 13px; max-width: 400px; }
+  .dolly { right: 4%; bottom: 3%; width: 95px; height: 95px; }
+  .band { min-height: 780px; align-items: flex-end; padding: 30px 16px 55px; }
+  .box { width: 100%; padding: 18px; background: rgba(1, 10, 26, .70); }
+  .fl, .fr { left: auto; right: 2%; top: 3%; bottom: auto; }
+  .fish { width: min(60vw, 250px); height: min(60vw, 250px); }
+  .dashline { left: 12px; }
+  .badge { margin-bottom: 16px; }
+  .floor { font-size: 7px; }
+}
 
-  .surface-hero p {
-    max-width: 565px;
-    font-size: 15px;
-    line-height: 1.9;
-    margin: 8px auto 0;
-    color: #e6f8ff;
-  }
-
-  .descend-hint {
-    margin-top: 38px;
-    font-family: var(--pixel-font);
-    font-size: 9px;
-    line-height: 2;
-    letter-spacing: 0.06em;
-    color: var(--mist);
-  }
-
-  .descend-hint .arrow {
-    display: block;
-    font-family: var(--body-font);
-    font-size: 26px;
-    line-height: 1.2;
-  }
-
-  .dolphin-hero {
-    width: clamp(100px, 19vw, 190px);
-    height: clamp(100px, 19vw, 190px);
-    object-fit: contain;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    position: absolute;
-    right: clamp(14px, 9vw, 130px);
-    bottom: 8%;
-    animation: float-bob 4s steps(2, end) infinite;
-  }
-
-  /* ---------- Ocean layers ---------- */
-  .ocean-layer {
-    position: relative;
-    min-height: 780px;
-    display: flex;
-    align-items: center;
-    padding: 90px max(24px, calc((100% - 1080px) / 2));
-    isolation: isolate;
-  }
-
-  .ocean-layer::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.18;
-    background-image: radial-gradient(#b8efff 2px, transparent 2px);
-    background-size: 46px 46px;
-  }
-
-  .layer-sunlit   { background: linear-gradient(180deg, var(--shallows) 0%, #0b4f80 100%); }
-  .layer-twilight { background: linear-gradient(180deg, #0b4f80 0%, var(--twilight-blue) 100%); }
-  .layer-midnight { background: linear-gradient(180deg, var(--twilight-blue) 0%, var(--midnight-blue) 100%); }
-  .layer-abyss    { background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--abyss-blue) 100%); }
-  .layer-hadal    { background: linear-gradient(180deg, var(--abyss-blue) 0%, var(--trench-black) 100%); }
-
-  .layer-card {
-    position: relative;
-    z-index: 2;
-    width: min(420px, 100%);
-    padding: 22px;
-    background: var(--card-tint);
-  }
-
-  .card-right { margin-left: auto; }
-
-  .zone-tag {
-    display: inline-block;
-    border: 2px solid var(--mist);
-    color: var(--mist);
-    padding: 11px 12px;
-    margin-bottom: 24px;
-    font-family: var(--pixel-font);
-    font-size: 8px;
-    line-height: 1.8;
-  }
-
-  .range-text {
-    font-family: var(--pixel-font);
-    font-size: 9px;
-    color: var(--mist);
-  }
-
-  h2 {
-    font-family: var(--pixel-font);
-    font-size: clamp(20px, 3.5vw, 34px);
-    letter-spacing: -0.04em;
-    line-height: 1.7;
-    margin: 12px 0 18px;
-  }
-
-  .layer-card p { color: #dff6ff; }
-
-  .bottom-mark {
-    font-family: var(--pixel-font);
-    font-size: 8px;
-    color: var(--mist);
-  }
-
-  .fun-fact {
-    margin-top: 22px;
-    padding: 16px;
-    border-left: 4px solid var(--mist);
-    background: rgba(184, 239, 255, 0.08);
-  }
-
-  /* ---------- Sea creatures ---------- */
-  .critter {
-    position: absolute;
-    z-index: 1;
-    width: clamp(190px, 29vw, 330px);
-    height: clamp(190px, 29vw, 330px);
-    object-fit: contain;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-    animation: float-bob 5s steps(2, end) infinite;
-    filter: none; /* no drop-shadows or filters */
-  }
-
-  .critter-left  { left: 5%;  top: 18%; }
-  .critter-right { right: 5%; top: 16%; }
-  .critter-small {
-    width: clamp(140px, 20vw, 230px);
-    height: clamp(140px, 20vw, 230px);
-  }
-
-  .depth-guide {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    border-left: 2px dashed rgba(184, 239, 255, 0.2);
-    pointer-events: none;
-  }
-
-  @keyframes float-bob {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-8px); }
-  }
-
-  /* ---------- Finale ---------- */
-  .final-dive {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 24px;
-    text-align: center;
-    background: linear-gradient(180deg, var(--trench-black) 0%, #000000 100%);
-  }
-
-  .final-dive h2 { max-width: 750px; margin: 24px auto; }
-  .final-dive p  { max-width: 520px; color: #dff6ff; }
-
-  .final-dolphin {
-    width: min(240px, 58vw);
-    height: auto;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-  }
-
-  .surface-link {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 14px 16px;
-    border: 2px solid var(--mist);
-    color: var(--mist);
-    font-family: var(--pixel-font);
-    font-size: 9px;
-    text-decoration: none;
-  }
-
-  .page-credits {
-    padding: 30px 20px;
-    text-align: center;
-    background: #000000;
-    color: #8fb8c9;
-    font-size: 12px;
-    line-height: 1.8;
-  }
-
-  .page-credits a { color: var(--mist); }
-
-  /* ---------- Small screens ---------- */
-  @media (max-width: 680px) {
-    .top-strip { left: 14px; right: 14px; top: 14px; font-size: 8px; }
-    .logo-mark { font-size: 8px; max-width: 150px; }
-    .top-strip a { padding: 8px; }
-    .surface-hero { padding-top: 125px; }
-    h1 { font-size: clamp(25px, 8vw, 45px); line-height: 1.7; }
-    .surface-hero p { font-size: 13px; max-width: 400px; }
-    .dolphin-hero { right: 4%; bottom: 3%; width: 95px; height: 95px; }
-    .ocean-layer { min-height: 780px; align-items: flex-end; padding: 30px 16px 55px; }
-    .layer-card { width: 100%; padding: 18px; background: var(--card-tint-mobile); }
-    .critter-left, .critter-right { left: auto; right: 2%; top: 3%; bottom: auto; }
-    .critter { width: min(60vw, 250px); height: min(60vw, 250px); }
-    .depth-guide { left: 12px; }
-    .zone-tag { margin-bottom: 16px; }
-    .bottom-mark { font-size: 7px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation: none !important; }
-  }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; }
+}
 </style>
 </head>
 <body id="top">
 <main>
-
-  <!-- Surface -->
-  <section class="surface-hero" id="surface">
-    <nav class="top-strip" aria-label="Main navigation">
-      <div class="logo-mark">BLUE / BELOW</div>
+  <section class="splash" id="surface">
+    <nav class="bar" aria-label="Main navigation">
+      <div class="logo">BLUE / BELOW</div>
       <a href="#sunlight">DIVE IN</a>
     </nav>
-    <div class="kicker">A pixel journey beneath the waves</div>
+    <div class="tag">A pixel journey beneath the waves</div>
     <h1>INTO THE <span>DEEP</span></h1>
     <p>Descend through the layers of the ocean. Meet the life that lives where the sunlight fades and the blue turns to darkness.</p>
-    <div class="descend-hint">SCROLL TO DESCEND<span class="arrow">&darr;</span></div>
-    <img class="dolphin-hero" src="https://neal.fun/deep-sea/optimized2-large/bottlenose-dolphin.png" alt="White pixel-art dolphin swimming" fetchpriority="high">
+    <div class="scrollnote">SCROLL TO DESCEND<i>&darr;</i></div>
+    <img class="dolly" src="https://neal.fun/deep-sea/optimized2-large/bottlenose-dolphin.png" alt="White pixel-art dolphin swimming" fetchpriority="high">
   </section>
-  <div class="depth-guide" aria-hidden="true"></div>
+  <div class="dashline" aria-hidden="true"></div>
 
-  <!-- Zone 1: Sunlight -->
-  <section class="ocean-layer layer-sunlit" id="sunlight">
-    <img class="critter critter-left" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-sea-turtle-shelled-reptile-005-2026-03-25T19-14-54.png" alt="Green pixel-art sea turtle" loading="lazy">
-    <div class="layer-card card-right">
-      <div class="zone-tag">ZONE 01 / SUNLIGHT</div>
-      <div class="range-text">0 — 200 METRES</div>
+  <section class="band sun" id="sunlight">
+    <img class="fish fl" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-sea-turtle-shelled-reptile-005-2026-03-25T19-14-54.png" alt="Green pixel-art sea turtle" loading="lazy">
+    <div class="box push">
+      <div class="badge">ZONE 01 / SUNLIGHT</div>
+      <div class="metres">0 — 200 METRES</div>
       <h2>WHERE THE LIGHT LIVES</h2>
       <p>Sunlight fills the upper ocean, warming the water and helping tiny drifting plants grow. This bright layer is home to coral reefs, turtles, dolphins and countless fish.</p>
-      <div class="bottom-mark">200 M BELOW THE SURFACE</div>
+      <div class="floor">200 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <!-- Zone 2: Twilight -->
-  <section class="ocean-layer layer-twilight">
-    <img class="critter critter-right" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-manta-ray-flat-fish-027-v3-2026-03-25T19-14-54.png" alt="Blue pixel-art manta ray" loading="lazy">
-    <div class="layer-card">
-      <div class="zone-tag">ZONE 02 / TWILIGHT</div>
-      <div class="range-text">200 — 1,000 METRES</div>
+  <section class="band dusk">
+    <img class="fish fr" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-manta-ray-flat-fish-027-v3-2026-03-25T19-14-54.png" alt="Blue pixel-art manta ray" loading="lazy">
+    <div class="box">
+      <div class="badge">ZONE 02 / TWILIGHT</div>
+      <div class="metres">200 — 1,000 METRES</div>
       <h2>THE BLUE BEGINS TO FADE</h2>
       <p>Only a little sunlight reaches this far. The water gets colder, and many animals rise toward the surface at night to feed before returning to the dim depths.</p>
-      <div class="fun-fact">Sunlight is too weak for most plants to grow in this layer.</div>
-      <div class="bottom-mark">1,000 M BELOW THE SURFACE</div>
+      <div class="note">Sunlight is too weak for most plants to grow in this layer.</div>
+      <div class="floor">1,000 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <!-- Zone 3: Midnight -->
-  <section class="ocean-layer layer-midnight">
-    <img class="critter critter-left" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-octopus-tentacles-eight-arms-003-2026-03-25T19-14-54.png" alt="Purple pixel-art octopus" loading="lazy">
-    <div class="layer-card card-right">
-      <div class="zone-tag">ZONE 03 / MIDNIGHT</div>
-      <div class="range-text">1,000 — 4,000 METRES</div>
+  <section class="band dark">
+    <img class="fish fl" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-octopus-tentacles-eight-arms-003-2026-03-25T19-14-54.png" alt="Purple pixel-art octopus" loading="lazy">
+    <div class="box push">
+      <div class="badge">ZONE 03 / MIDNIGHT</div>
+      <div class="metres">1,000 — 4,000 METRES</div>
       <h2>DARKNESS HAS A GLOW</h2>
       <p>Sunlight can no longer reach this zone. Some animals make their own light through bioluminescence — a tiny signal in an enormous darkness.</p>
-      <div class="fun-fact">The Titanic rests around 3,800 metres below the surface.</div>
-      <div class="bottom-mark">4,000 M BELOW THE SURFACE</div>
+      <div class="note">The Titanic rests around 3,800 metres below the surface.</div>
+      <div class="floor">4,000 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <!-- Zone 4: Abyssal -->
-  <section class="ocean-layer layer-abyss">
-    <img class="critter critter-right" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/anglerfish_glowing__bioluminescent_glow.png" alt="Blue pixel-art glowing deep-sea fish" loading="lazy">
-    <div class="layer-card">
-      <div class="zone-tag">ZONE 04 / ABYSSAL</div>
-      <div class="range-text">4,000 — 6,000 METRES</div>
+  <section class="band abyss">
+    <img class="fish fr" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/anglerfish_glowing__bioluminescent_glow.png" alt="Blue pixel-art glowing deep-sea fish" loading="lazy">
+    <div class="box">
+      <div class="badge">ZONE 04 / ABYSSAL</div>
+      <div class="metres">4,000 — 6,000 METRES</div>
       <h2>A WORLD OF EXTREMES</h2>
       <p>The pressure is immense and the temperature is close to freezing. Food is scarce, so life here survives with remarkable adaptations and patience.</p>
-      <div class="fun-fact">Some deep-sea animals can go a very long time between meals.</div>
-      <div class="bottom-mark">6,000 M BELOW THE SURFACE</div>
+      <div class="note">Some deep-sea animals can go a very long time between meals.</div>
+      <div class="floor">6,000 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <!-- Zone 5: Hadal -->
-  <section class="ocean-layer layer-hadal">
-    <img class="critter critter-left critter-small" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/blowfish_round__deep_sea_dark.png" alt="Dark blue pixel-art pufferfish" loading="lazy">
-    <img class="critter critter-right critter-small" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/crab_hermit_shell__arctic_ice_blue.png" alt="Blue pixel-art hermit crab" loading="lazy">
-    <div class="layer-card card-right">
-      <div class="zone-tag">ZONE 05 / HADAL</div>
-      <div class="range-text">6,000 — 11,000 METRES</div>
+  <section class="band trench">
+    <img class="fish fl fs" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/blowfish_round__deep_sea_dark.png" alt="Dark blue pixel-art pufferfish" loading="lazy">
+    <img class="fish fr fs" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/crab_hermit_shell__arctic_ice_blue.png" alt="Blue pixel-art hermit crab" loading="lazy">
+    <div class="box push">
+      <div class="badge">ZONE 05 / HADAL</div>
+      <div class="metres">6,000 — 11,000 METRES</div>
       <h2>ALMOST ANOTHER PLANET</h2>
       <p>Deep ocean trenches cut into the seafloor. Very few people have explored these places, and every expedition can reveal something unexpected.</p>
-      <div class="fun-fact">The Challenger Deep in the Mariana Trench is about 10.9 kilometres down.</div>
-      <div class="bottom-mark">10,900 M BELOW THE SURFACE</div>
+      <div class="note">The Challenger Deep in the Mariana Trench is about 10.9 kilometres down.</div>
+      <div class="floor">10,900 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <!-- Finale -->
-  <section class="final-dive">
-    <div class="kicker">YOU REACHED THE BOTTOM</div>
-    <img class="final-dolphin" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/dolphin_jumping__albino_pure_white.png" alt="Pixel-art dolphin" loading="lazy">
+  <section class="end">
+    <div class="tag">YOU REACHED THE BOTTOM</div>
+    <img class="enddolphin" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/dolphin_jumping__albino_pure_white.png" alt="Pixel-art dolphin" loading="lazy">
     <h2>THE DEEPEST DARK IS STILL FULL OF LIFE</h2>
     <p>You travelled from sunlit water to one of Earth's most extreme environments. The ocean is vast, mysterious, and still waiting to be understood.</p>
-    <a class="surface-link" href="#top">BACK TO SURFACE</a>
+    <a class="upbtn" href="#top">BACK TO SURFACE</a>
   </section>
-
-  <footer class="page-credits">
-    AN OCEAN JOURNEY IN PIXELS · MADE WITH HTML + CSS<br>
-    Pixel sprites: <a href="https://freepixel.art/browse/ocean-creatures/" target="_blank" rel="noopener noreferrer">FreePixel Ocean Creatures</a> and <a href="https://freepixel.art/browse/runner-ocean-creatures/" target="_blank" rel="noopener noreferrer">Ocean Creatures Vol 2</a>.
-  </footer>
-
+  <footer class="credit">AN OCEAN JOURNEY IN PIXELS · MADE WITH HTML + CSS<br>Pixel sprites: <a href="https://freepixel.art/browse/ocean-creatures/" target="_blank" rel="noopener noreferrer">FreePixel Ocean Creatures</a> and <a href="https://freepixel.art/browse/runner-ocean-creatures/" target="_blank" rel="noopener noreferrer">Ocean Creatures Vol 2</a>.</footer>
 </main>
 </body>
 </html>
