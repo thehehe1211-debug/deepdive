@@ -3,31 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="
+<meta name="theme-color" content="#0a5f8f">
 <title>Into the Deep — Pixel Ocean</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+  /* ---------- Colours and fonts ---------- */
   :root {
-    --white:
-    --pale:
+    --foam: #ffffff;
+    --mist: #b8efff;
+    --shallows: #0a5f8f;
+    --twilight-blue: #0b3a6b;
+    --midnight-blue: #071f4a;
+    --abyss-blue: #040f2c;
+    --trench-black: #01040f;
+    --card-tint: rgba(1, 16, 39, 0.26);
+    --card-tint-mobile: rgba(1, 10, 26, 0.70);
     --pixel-font: "Press Start 2P", "Courier New", monospace;
     --body-font: "Courier New", monospace;
   }
+
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+
   body {
     margin: 0;
-    color: var(--white);
+    color: var(--foam);
     font-family: var(--body-font);
-    background:
-    overflow-value: hidden;
+    background: var(--trench-black);
+    overflow-x: hidden;
   }
+
   a { color: inherit; }
-  /* Every section is normal page content: nothing captures or disables scrolling. */
-  .hero {
-    least-height: 100svh;
+
+  /* ---------- Hero ---------- */
+  .surface-hero {
+    min-height: 100svh;
     position: relative;
     display: flex;
     align-items: center;
@@ -35,46 +47,96 @@
     flex-direction: column;
     text-align: center;
     padding: 110px 24px 70px;
-    background: linear-gradient(180deg,
+    background: linear-gradient(180deg, #1a8fc4 0%, var(--shallows) 100%);
   }
-  .hero::before {
+
+  .surface-hero::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: .22;
-    background-image: radial-gradient(
+    opacity: 0.22;
+    background-image: radial-gradient(#ffffff 2px, transparent 2px);
     background-size: 38px 38px;
-    mask-image: linear-gradient(to bottom, black, transparent 90%);
+    mask-image: linear-gradient(to bottom, #000000, transparent 90%);
   }
-  .topbar {
+
+  .top-strip {
     position: absolute;
-    top: 22px; left: 25px; right: 25px;
-    display: flex; align-items: center; justify-content: space-between;
+    top: 22px;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 16px;
     font-size: 10px;
     line-height: 1.6;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  .brand { font-family: var(--pixel-font); font-size: 10px; line-height: 1.7; }
-  .topbar a { text-decoration: none; border: 2px solid rgba(255,255,255,.72); padding: 10px 12px; }
-  .eyebrow { font-family: var(--pixel-font); font-size: 10px; line-height: 1.9; letter-spacing: .08em; color:
+
+  .logo-mark {
+    font-family: var(--pixel-font);
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .top-strip a {
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    padding: 10px 12px;
+  }
+
+  .kicker {
+    font-family: var(--pixel-font);
+    font-size: 10px;
+    line-height: 1.9;
+    letter-spacing: 0.08em;
+    color: var(--mist);
+  }
+
   h1 {
-    highest-width: 1000px;
+    max-width: 1000px;
     margin: 26px auto 18px;
     font-family: var(--pixel-font);
     font-size: clamp(30px, 7.8vw, 88px);
     line-height: 1.55;
-    letter-spacing: -.05em;
+    letter-spacing: -0.05em;
     overflow-wrap: anywhere;
-    color:
+    color: var(--foam);
   }
-  h1 span { display: block; color:
-  .hero p { highest-width: 565px; font-size: 15px; line-height: 1.9; margin: 8px auto 0; color:
-  .scroll-cue { margin-top: 38px; font-family: var(--pixel-font); font-size: 9px; line-height: 2; letter-spacing: .06em; color:
-  .scroll-cue .arrow { display: block; font-family: var(--body-font); font-size: 26px; line-height: 1.2; }
-  .hero-creature {
+
+  h1 span {
+    display: block;
+    color: var(--mist);
+  }
+
+  .surface-hero p {
+    max-width: 565px;
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 8px auto 0;
+    color: #e6f8ff;
+  }
+
+  .descend-hint {
+    margin-top: 38px;
+    font-family: var(--pixel-font);
+    font-size: 9px;
+    line-height: 2;
+    letter-spacing: 0.06em;
+    color: var(--mist);
+  }
+
+  .descend-hint .arrow {
+    display: block;
+    font-family: var(--body-font);
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .dolphin-hero {
     width: clamp(100px, 19vw, 190px);
     height: clamp(100px, 19vw, 190px);
     object-fit: contain;
@@ -83,92 +145,183 @@
     position: absolute;
     right: clamp(14px, 9vw, 130px);
     bottom: 8%;
-    animation: bob 4s steps(2, end) infinite;
+    animation: float-bob 4s steps(2, end) infinite;
   }
-  .depth-section {
+
+  /* ---------- Ocean layers ---------- */
+  .ocean-layer {
     position: relative;
-    least-height: 780px;
+    min-height: 780px;
     display: flex;
     align-items: center;
-    padding: 90px highest(24px, calc((100% - 1080px) / 2));
+    padding: 90px max(24px, calc((100% - 1080px) / 2));
     isolation: isolate;
   }
-  .depth-section::before {
+
+  .ocean-layer::before {
     content: "";
-    position: absolute; inset: 0; extra-index: -1; pointer-events: none;
-    opacity: .18;
-    background-image: radial-gradient(
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image: radial-gradient(#b8efff 2px, transparent 2px);
     background-size: 46px 46px;
   }
-  .sunlight { background: linear-gradient(180deg,
-  .twilight { background: linear-gradient(180deg,
-  .midnight { background: linear-gradient(180deg,
-  .abyss { background: linear-gradient(180deg,
-  .hadal { background: linear-gradient(180deg,
-  .depth-inner { position: relative; extra-index: 2; width: least(420px, 100%); padding: 22px; background: rgba(1, 16, 39, .26); }
-  .right-copy { margin-left: auto; }
-  .zone-pill {
+
+  .layer-sunlit   { background: linear-gradient(180deg, var(--shallows) 0%, #0b4f80 100%); }
+  .layer-twilight { background: linear-gradient(180deg, #0b4f80 0%, var(--twilight-blue) 100%); }
+  .layer-midnight { background: linear-gradient(180deg, var(--twilight-blue) 0%, var(--midnight-blue) 100%); }
+  .layer-abyss    { background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--abyss-blue) 100%); }
+  .layer-hadal    { background: linear-gradient(180deg, var(--abyss-blue) 0%, var(--trench-black) 100%); }
+
+  .layer-card {
+    position: relative;
+    z-index: 2;
+    width: min(420px, 100%);
+    padding: 22px;
+    background: var(--card-tint);
+  }
+
+  .card-right { margin-left: auto; }
+
+  .zone-tag {
     display: inline-block;
-    border: 2px solid
-    color:
+    border: 2px solid var(--mist);
+    color: var(--mist);
     padding: 11px 12px;
     margin-bottom: 24px;
     font-family: var(--pixel-font);
     font-size: 8px;
     line-height: 1.8;
   }
-  .depth-label { font-family: var(--pixel-font); font-size: 9px; color:
-  h2 { font-family: var(--pixel-font); font-size: clamp(20px, 3.5vw, 34px); letter-spacing: -.04em; line-height: 1.7; margin: 12px 0 18px; }
-  .depth-inner p { color:
-  .depth-number { font-family: var(--pixel-font); font-size: 8px; color:
-  .fact { margin-top: 22px; padding: 16px; border-left: 4px solid
-  .sprite {
+
+  .range-text {
+    font-family: var(--pixel-font);
+    font-size: 9px;
+    color: var(--mist);
+  }
+
+  h2 {
+    font-family: var(--pixel-font);
+    font-size: clamp(20px, 3.5vw, 34px);
+    letter-spacing: -0.04em;
+    line-height: 1.7;
+    margin: 12px 0 18px;
+  }
+
+  .layer-card p { color: #dff6ff; }
+
+  .bottom-mark {
+    font-family: var(--pixel-font);
+    font-size: 8px;
+    color: var(--mist);
+  }
+
+  .fun-fact {
+    margin-top: 22px;
+    padding: 16px;
+    border-left: 4px solid var(--mist);
+    background: rgba(184, 239, 255, 0.08);
+  }
+
+  /* ---------- Sea creatures ---------- */
+  .critter {
     position: absolute;
-    extra-index: 1;
+    z-index: 1;
     width: clamp(190px, 29vw, 330px);
     height: clamp(190px, 29vw, 330px);
     object-fit: contain;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
-    animation: bob 5s steps(2, end) infinite;
-    /* No drop-shadows, filters, or text shadows. */
-    filter: none;
+    animation: float-bob 5s steps(2, end) infinite;
+    filter: none; /* no drop-shadows or filters */
   }
-  .sprite-left { left: 5%; top: 18%; }
-  .sprite-right { right: 5%; top: 16%; }
-  .sprite-low { left: 10%; bottom: 8%; }
-  .sprite-small { width: clamp(140px, 20vw, 230px); height: clamp(140px, 20vw, 230px); }
-  .depth-line { position: absolute; left: 50%; top: 0; bottom: 0; border-left: 2px dashed rgba(184,239,255,.2); pointer-events: none; }
-  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-  .finale {
-    least-height: 100svh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 100px 24px; text-align: center;
-    background: linear-gradient(180deg,
+
+  .critter-left  { left: 5%;  top: 18%; }
+  .critter-right { right: 5%; top: 16%; }
+  .critter-small {
+    width: clamp(140px, 20vw, 230px);
+    height: clamp(140px, 20vw, 230px);
+  }
+
+  .depth-guide {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    border-left: 2px dashed rgba(184, 239, 255, 0.2);
+    pointer-events: none;
+  }
+
+  @keyframes float-bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+
+  /* ---------- Finale ---------- */
+  .final-dive {
     position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--trench-black) 0%, #000000 100%);
   }
-  .finale h2 { highest-width: 750px; margin: 24px auto; }
-  .finale p { highest-width: 520px; color:
-  .finale-sprite { width: least(240px, 58vw); height: auto; image-rendering: pixelated; image-rendering: crisp-edges; }
-  .backtop { display: inline-block; margin-top: 25px; padding: 14px 16px; border: 2px solid
-  footer { padding: 30px 20px; text-align: center; background:
-  footer a { color:
-  @media (highest-width: 680px) {
-    .topbar { left: 14px; right: 14px; top: 14px; font-size: 8px; }
-    .brand { font-size: 8px; highest-width: 150px; }
-    .topbar a { padding: 8px; }
-    .hero { padding-top: 125px; }
+
+  .final-dive h2 { max-width: 750px; margin: 24px auto; }
+  .final-dive p  { max-width: 520px; color: #dff6ff; }
+
+  .final-dolphin {
+    width: min(240px, 58vw);
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .surface-link {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 16px;
+    border: 2px solid var(--mist);
+    color: var(--mist);
+    font-family: var(--pixel-font);
+    font-size: 9px;
+    text-decoration: none;
+  }
+
+  .page-credits {
+    padding: 30px 20px;
+    text-align: center;
+    background: #000000;
+    color: #8fb8c9;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .page-credits a { color: var(--mist); }
+
+  /* ---------- Small screens ---------- */
+  @media (max-width: 680px) {
+    .top-strip { left: 14px; right: 14px; top: 14px; font-size: 8px; }
+    .logo-mark { font-size: 8px; max-width: 150px; }
+    .top-strip a { padding: 8px; }
+    .surface-hero { padding-top: 125px; }
     h1 { font-size: clamp(25px, 8vw, 45px); line-height: 1.7; }
-    .hero p { font-size: 13px; highest-width: 400px; }
-    .hero-creature { right: 4%; bottom: 3%; width: 95px; height: 95px; }
-    .depth-section { least-height: 780px; align-items: flex-end; padding: 30px 16px 55px; }
-    .depth-inner { width: 100%; padding: 18px; background: rgba(1, 10, 26, .70); }
-    .sprite-left, .sprite-right, .sprite-low { left: auto; right: 2%; top: 3%; bottom: auto; }
-    .sprite { width: least(60vw, 250px); height: least(60vw, 250px); }
-    .depth-line { left: 12px; }
-    .zone-pill { margin-bottom: 16px; }
-    .depth-number { font-size: 7px; }
+    .surface-hero p { font-size: 13px; max-width: 400px; }
+    .dolphin-hero { right: 4%; bottom: 3%; width: 95px; height: 95px; }
+    .ocean-layer { min-height: 780px; align-items: flex-end; padding: 30px 16px 55px; }
+    .layer-card { width: 100%; padding: 18px; background: var(--card-tint-mobile); }
+    .critter-left, .critter-right { left: auto; right: 2%; top: 3%; bottom: auto; }
+    .critter { width: min(60vw, 250px); height: min(60vw, 250px); }
+    .depth-guide { left: 12px; }
+    .zone-tag { margin-bottom: 16px; }
+    .bottom-mark { font-size: 7px; }
   }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; }
@@ -177,88 +330,100 @@
 </head>
 <body id="top">
 <main>
-  <section class="hero" id="surface">
-    <nav class="topbar" aria-label="Main navigation">
-      <div class="brand">BLUE / BELOW</div>
-      <a href="
+
+  <!-- Surface -->
+  <section class="surface-hero" id="surface">
+    <nav class="top-strip" aria-label="Main navigation">
+      <div class="logo-mark">BLUE / BELOW</div>
+      <a href="#sunlight">DIVE IN</a>
     </nav>
-    <div class="eyebrow">A pixel journey beneath the waves</div>
+    <div class="kicker">A pixel journey beneath the waves</div>
     <h1>INTO THE <span>DEEP</span></h1>
     <p>Descend through the layers of the ocean. Meet the life that lives where the sunlight fades and the blue turns to darkness.</p>
-    <div class="scroll-cue">SCROLL TO DESCEND<span class="arrow">&
-    <img class="hero-creature" src="https://neal.fun/deep-sea/optimized2-large/bottlenose-dolphin.png" alt="White pixel-art dolphin swimming" fetchpriority="high">
+    <div class="descend-hint">SCROLL TO DESCEND<span class="arrow">&darr;</span></div>
+    <img class="dolphin-hero" src="https://neal.fun/deep-sea/optimized2-large/bottlenose-dolphin.png" alt="White pixel-art dolphin swimming" fetchpriority="high">
   </section>
-  <div class="depth-line" aria-hidden="true"></div>
+  <div class="depth-guide" aria-hidden="true"></div>
 
-  <section class="depth-section sunlight" id="sunlight">
-    <img class="sprite sprite-left" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-sea-turtle-shelled-reptile-005-2026-03-25T19-14-54.png" alt="Green pixel-art sea turtle" loading="lazy">
-    <div class="depth-inner right-copy">
-      <div class="zone-pill">ZONE 01 / SUNLIGHT</div>
-      <div class="depth-label">0 — 200 METRES</div>
+  <!-- Zone 1: Sunlight -->
+  <section class="ocean-layer layer-sunlit" id="sunlight">
+    <img class="critter critter-left" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-sea-turtle-shelled-reptile-005-2026-03-25T19-14-54.png" alt="Green pixel-art sea turtle" loading="lazy">
+    <div class="layer-card card-right">
+      <div class="zone-tag">ZONE 01 / SUNLIGHT</div>
+      <div class="range-text">0 — 200 METRES</div>
       <h2>WHERE THE LIGHT LIVES</h2>
       <p>Sunlight fills the upper ocean, warming the water and helping tiny drifting plants grow. This bright layer is home to coral reefs, turtles, dolphins and countless fish.</p>
-      <div class="depth-number">200 M BELOW THE SURFACE</div>
+      <div class="bottom-mark">200 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <section class="depth-section twilight">
-    <img class="sprite sprite-right" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-manta-ray-flat-fish-027-v3-2026-03-25T19-14-54.png" alt="Blue pixel-art manta ray" loading="lazy">
-    <div class="depth-inner">
-      <div class="zone-pill">ZONE 02 / TWILIGHT</div>
-      <div class="depth-label">200 — 1,000 METRES</div>
+  <!-- Zone 2: Twilight -->
+  <section class="ocean-layer layer-twilight">
+    <img class="critter critter-right" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-manta-ray-flat-fish-027-v3-2026-03-25T19-14-54.png" alt="Blue pixel-art manta ray" loading="lazy">
+    <div class="layer-card">
+      <div class="zone-tag">ZONE 02 / TWILIGHT</div>
+      <div class="range-text">200 — 1,000 METRES</div>
       <h2>THE BLUE BEGINS TO FADE</h2>
       <p>Only a little sunlight reaches this far. The water gets colder, and many animals rise toward the surface at night to feed before returning to the dim depths.</p>
-      <div class="fact">Sunlight is too weak for most plants to grow in this layer.</div>
-      <div class="depth-number">1,000 M BELOW THE SURFACE</div>
+      <div class="fun-fact">Sunlight is too weak for most plants to grow in this layer.</div>
+      <div class="bottom-mark">1,000 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <section class="depth-section midnight">
-    <img class="sprite sprite-left" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-octopus-tentacles-eight-arms-003-2026-03-25T19-14-54.png" alt="Purple pixel-art octopus" loading="lazy">
-    <div class="depth-inner right-copy">
-      <div class="zone-pill">ZONE 03 / MIDNIGHT</div>
-      <div class="depth-label">1,000 — 4,000 METRES</div>
+  <!-- Zone 3: Midnight -->
+  <section class="ocean-layer layer-midnight">
+    <img class="critter critter-left" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/ocean-creatures/ocean-octopus-tentacles-eight-arms-003-2026-03-25T19-14-54.png" alt="Purple pixel-art octopus" loading="lazy">
+    <div class="layer-card card-right">
+      <div class="zone-tag">ZONE 03 / MIDNIGHT</div>
+      <div class="range-text">1,000 — 4,000 METRES</div>
       <h2>DARKNESS HAS A GLOW</h2>
       <p>Sunlight can no longer reach this zone. Some animals make their own light through bioluminescence — a tiny signal in an enormous darkness.</p>
-      <div class="fact">The Titanic rests around 3,800 metres below the surface.</div>
-      <div class="depth-number">4,000 M BELOW THE SURFACE</div>
+      <div class="fun-fact">The Titanic rests around 3,800 metres below the surface.</div>
+      <div class="bottom-mark">4,000 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <section class="depth-section abyss">
-    <img class="sprite sprite-right" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/anglerfish_glowing__bioluminescent_glow.png" alt="Blue pixel-art glowing deep-sea fish" loading="lazy">
-    <div class="depth-inner">
-      <div class="zone-pill">ZONE 04 / ABYSSAL</div>
-      <div class="depth-label">4,000 — 6,000 METRES</div>
+  <!-- Zone 4: Abyssal -->
+  <section class="ocean-layer layer-abyss">
+    <img class="critter critter-right" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/anglerfish_glowing__bioluminescent_glow.png" alt="Blue pixel-art glowing deep-sea fish" loading="lazy">
+    <div class="layer-card">
+      <div class="zone-tag">ZONE 04 / ABYSSAL</div>
+      <div class="range-text">4,000 — 6,000 METRES</div>
       <h2>A WORLD OF EXTREMES</h2>
       <p>The pressure is immense and the temperature is close to freezing. Food is scarce, so life here survives with remarkable adaptations and patience.</p>
-      <div class="fact">Some deep-sea animals can go a very long time between meals.</div>
-      <div class="depth-number">6,000 M BELOW THE SURFACE</div>
+      <div class="fun-fact">Some deep-sea animals can go a very long time between meals.</div>
+      <div class="bottom-mark">6,000 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <section class="depth-section hadal">
-    <img class="sprite sprite-left sprite-small" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/blowfish_round__deep_sea_dark.png" alt="Dark blue pixel-art pufferfish" loading="lazy">
-    <img class="sprite sprite-right sprite-small" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/crab_hermit_shell__arctic_ice_blue.png" alt="Blue pixel-art hermit crab" loading="lazy">
-    <div class="depth-inner right-copy">
-      <div class="zone-pill">ZONE 05 / HADAL</div>
-      <div class="depth-label">6,000 — 11,000 METRES</div>
+  <!-- Zone 5: Hadal -->
+  <section class="ocean-layer layer-hadal">
+    <img class="critter critter-left critter-small" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/blowfish_round__deep_sea_dark.png" alt="Dark blue pixel-art pufferfish" loading="lazy">
+    <img class="critter critter-right critter-small" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/crab_hermit_shell__arctic_ice_blue.png" alt="Blue pixel-art hermit crab" loading="lazy">
+    <div class="layer-card card-right">
+      <div class="zone-tag">ZONE 05 / HADAL</div>
+      <div class="range-text">6,000 — 11,000 METRES</div>
       <h2>ALMOST ANOTHER PLANET</h2>
       <p>Deep ocean trenches cut into the seafloor. Very few people have explored these places, and every expedition can reveal something unexpected.</p>
-      <div class="fact">The Challenger Deep in the Mariana Trench is about 10.9 kilometres down.</div>
-      <div class="depth-number">10,900 M BELOW THE SURFACE</div>
+      <div class="fun-fact">The Challenger Deep in the Mariana Trench is about 10.9 kilometres down.</div>
+      <div class="bottom-mark">10,900 M BELOW THE SURFACE</div>
     </div>
   </section>
 
-  <section class="finale">
-    <div class="eyebrow">YOU REACHED THE BOTTOM</div>
-    <img class="finale-sprite" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/dolphin_jumping__albino_pure_white.png" alt="Pixel-art dolphin" loading="lazy">
+  <!-- Finale -->
+  <section class="final-dive">
+    <div class="kicker">YOU REACHED THE BOTTOM</div>
+    <img class="final-dolphin" src="https://pub-8b7609252a6742d7b029292aaede7f7f.r2.dev/sorted/runner-ocean-creatures/dolphin_jumping__albino_pure_white.png" alt="Pixel-art dolphin" loading="lazy">
     <h2>THE DEEPEST DARK IS STILL FULL OF LIFE</h2>
     <p>You travelled from sunlit water to one of Earth's most extreme environments. The ocean is vast, mysterious, and still waiting to be understood.</p>
-    <a class="backtop" href="
+    <a class="surface-link" href="#top">BACK TO SURFACE</a>
   </section>
-  <footer>AN OCEAN JOURNEY IN PIXELS · MADE WITH HTML + CSS<br>Pixel sprites: <a href="https://freepixel.art/browse/ocean-creatures/" target="_blank" rel="noopener noreferrer">FreePixel Ocean Creatures</a> and <a href="https://freepixel.art/browse/runner-ocean-creatures/" target="_blank" rel="noopener noreferrer">Ocean Creatures Vol 2</a>.</footer>
+
+  <footer class="page-credits">
+    AN OCEAN JOURNEY IN PIXELS · MADE WITH HTML + CSS<br>
+    Pixel sprites: <a href="https://freepixel.art/browse/ocean-creatures/" target="_blank" rel="noopener noreferrer">FreePixel Ocean Creatures</a> and <a href="https://freepixel.art/browse/runner-ocean-creatures/" target="_blank" rel="noopener noreferrer">Ocean Creatures Vol 2</a>.
+  </footer>
+
 </main>
 </body>
 </html>
-  humanize the code , without changing any features
